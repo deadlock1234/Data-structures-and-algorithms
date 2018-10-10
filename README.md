@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include<stdlib.h>
-struct subarray{           /*this structure is mainly created to store the maximum subarrray"s properties namely where does it start
-                             it's end index and the sum of elements between these indices*/
+struct subarray{          
     int start;
     int end;
     int sum;
 };
 struct subarray findmaxsubarray(int arr[],int low,int mid,int high)
 {   struct subarray s;
-    int x;                                                   /*this function returns a structure that defines the maximum subarray of a                                                                 given array*/
+    int x;                                                   
     int y;                                                     
     int leftsum=-2000,rightsum=-2000,sum=0,i=0,j=0;
     for(i=mid;i>=low;i--)
@@ -37,7 +36,7 @@ struct subarray findmaxsubarray(int arr[],int low,int mid,int high)
 
     
 }
-struct subarray maximumsubarray(int arr[],int low,int high)    /* divides  an array into two parts and recursively finds the maximum                                                                     subarray of those two parts*/
+struct subarray maximumsubarray(int arr[],int low,int high)    
 {
     int mid,i=low,j=high;
     if(low==high)
