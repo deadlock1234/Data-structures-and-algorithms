@@ -30,8 +30,6 @@ void append(struct node*head,int data)
     }
     head->next=newnode;
     
-    
-    
 }
 void push(struct node**head_ref,int data)
 {
