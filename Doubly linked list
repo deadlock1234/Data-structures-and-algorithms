@@ -1,0 +1,142 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+struct node{
+    int data;
+    struct node*prev;
+    struct node*next;
+};
+void insertafter(struct node*head,int pos,int data)
+{   struct node*newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    int i=1;
+    while(i<pos && head->next!=NULL)
+    {
+        head=head->next;
+        i++;
+    }
+    if(i<pos)
+    {
+        printf("the number of elements is less than the \n position");
+        printf("element inserted at the last position \n");
+    }
+    newnode->next=head->next;
+    newnode->prev=head;
+    head->next=newnode;
+    if(newnode->next!=NULL)
+        newnode->next->prev=newnode;
+}
+void push(struct node**head_ref,int data)
+{   
+    struct node*newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->prev=NULL;
+    newnode->next=*head_ref;
+    if(*head_ref!=NULL)
+        newnode->next->prev=newnode;
+    *head_ref=newnode;    
+}
+void append(struct node**head_ref,int data)
+{   struct node*head=*head_ref;
+    struct node*newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=NULL;
+    if(*head_ref==NULL)
+    {
+        *head_ref=newnode;
+        newnode->prev=NULL;
+    }
+    else
+    {
+        while(head->next!=NULL)
+        {
+            head=head->next;
+        }
+        head->next=newnode;
+        newnode->prev=head;
+    }
+}
+void print(struct node*head)
+{   struct node*temp=head;
+    while(head!=NULL)
+    {   temp=head;
+        printf(" \t%d",head->data);
+        head=head->next;
+    }
+    printf("\n");
+   
+   
+   
+}
+void delete(struct node**head_ref,int data)
+{
+    struct node*head=*head_ref;
+    if(head->data==data)
+        {
+            *head_ref=head->next;
+            head->next->prev=NULL;
+        }
+    else
+    {
+        while(head->data!=data && head->next!=NULL)
+        {
+            head=head->next;
+        }
+        
+        if(head->data!=data)
+            {
+                printf("given value doesnt \n exist");
+                
+            }
+        else
+        {
+        head->prev->next=head->next;
+        if(head->next!=NULL)
+            head->next->prev=head->prev;
+        }
+    }
+    if(head->data==data)
+    {
+        printf("the linked after deleting %d is: \n",data);
+    }
+    else
+    {
+        printf("no change in linked list as %d not found",data);
+    }
+    print(*head_ref);
+    
+    
+    
+}
+int main()
+{
+    struct node*head=NULL;
+    push(&head,10);
+    push(&head,9);
+    push(&head,7);
+    
+    insertafter(head,1,8);
+    insertafter(head,2,12);
+    append(&head,15);
+    append(&head,20);
+    printf("the linked list is:\n");
+    print(head);
+    delete(&head,7);
+    
+   delete(&head,9);
+    delete(&head,20);
+    delete(&head,25);
+    print(head);
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+}
