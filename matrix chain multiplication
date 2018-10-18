@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include<limits.h>
+int main()
+{
+    int arr[]={1,2,3,4};
+    int n = sizeof(arr)/sizeof(arr[0]); 
+    int i,j,k,l;
+    int m[n][n];int s[n][n];
+    for(i=0;i<n;i++)
+    {
+        m[i][i]=0;
+    }
+    for(l=1;l<n;l++)
+    {
+        for(i=1;i<n-l;i++)
+        {
+            j=i+l;
+            m[i][j]=INT_MAX;
+            int q;
+            for(k=i;k<j;k++)
+            {
+                q=m[i][k]+m[k+1][j]+arr[i-1]*arr[k]*arr[j];
+                if(q<m[i][j])
+                {
+                    m[i][j]=q;
+                    s[i][j]=k;
+                }
+            }
+            printf("\n cost to multiply matrices %d and %d is= %d",i,j,q);
+        }
+       
+    }
